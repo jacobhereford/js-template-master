@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html>
+    <head>
+      <title>Chores</title>
+
+      <script src="vendor.bundle.js" type="text/javascript" charset="utf-8" defer></script>
+      <script src="bundle.js" type="text/javascript" charset="utf-8" defer></script>
+    </head>
+    <body class="container-fluid">
+    <h1>To Do List</h1>
+      <form id="sign-up">
+        <fieldset>
+          <legend>Sign up!</legend>
+            <input type="text" name="credentials[email]" placeholder="E-mail">
+            <input type="password" name="credentials[password]" placeholder="Password">
+            <input type="password" name="credentials[password_confirmation]" placeholder="Password Confirm">
+            <input type="submit" name="submit" value="Sign up!">
+        </fieldset>
+      </form>
+      <form id="sign-in">
+        <fieldset>
+          <legend>Sign In!</legend>
+            <input type="text" name="credentials[email]" placeholder="E-mail">
+            <input type="password" name="credentials[password]" placeholder="Password">
+            <input type="submit" name="submit" value="Sign In!">
+        </fieldset>
+      </form>
+      <form id="sign-out">
+        <fieldset>
+          <legend>Sign Out</legend>
+            <input type="submit" name="submit" value="Sign out!">
+        </fieldset>
+      </form>
+      <form id="change-password">
+        <fieldset>
+          <legend>Change Password</legend>
+            <input type="password" name="passwords[old]" placeholder="Old Password">
+            <input type="password" name="passwords[new]" placeholder="New Password">
+            <input type="submit" name="submit" value="Change Password">
+        </fieldset>
+      </form>
+      <form id="create-chore">
+        <fieldset>
+          <legend>Create Chore</legend>
+          <input type="create" name="chore[chore]" placeholder="Create Chore">
+          <input type="create" name="chore[where]" placeholder="Where">
+          <input type="create" name="chore[when]" placeholder="When">
+          <input type="create" name="chore[done_by]" placeholder="Done_by">
+          <input type="submit" name="submit" value="Create Chore">
+        </fieldset>
+      </form>
+      <!-- <form id="update-chore">
+        <fieldset>
+          <legend>Update Chore</legend>
+          <input type="update" name="chore[chore]" placeholder="Update Chore">
+          <input type="update" name="chore[where]" placeholder="Update Chore">
+          <input type="update" name="chore[when]" placeholder="Update Chore">
+          <input type="update" name="chore[done_by]" placeholder="Update Chore">
+          <input type="submit" name="submit" value="Update Chore">
+        </fieldset>
+      </form>
+      <form id="delete-chore">
+        <fieldset>
+          <legend>Delete Chore</legend>
+          <input type="delete" name="chore[i]" placeholder="Delete Chore">
+          <input type="submit" name="submit" value="Delete Chore">
+        </fieldset>
+      </form> -->
+      <table id="chores" class="chores">
+        <thead>
+          <th>Task</th>
+          <th>Where</th>
+          <th>When</th>
+          <th>Actions</th>
+        </thead>
+        <tbody>
+        </tbody>
+      </table>
+    </body>
+</html>

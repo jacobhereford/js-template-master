@@ -1,0 +1,80 @@
+'use strict';
+
+const app = require('../app.js');
+const api = require('./api.js');
+
+const success = (data) => {
+  if (data) {
+    console.log(data);
+  } else {
+    console.log('Success');
+  }
+};
+
+const choreDeleteSuccess = (event) => {
+  let parent = $(event.currentTarget).parents('tr');
+  parent.remove();
+};
+
+const failure = (error) => {
+  console.error(error);
+};
+
+const signInSuccess = (data) => {
+  app.user = data.user;
+  console.log(app.user);
+};
+
+
+const deleteChore = (event) => {
+  event.preventDefault();
+  let id = $(event.currentTarget).data('chore-id');
+  api.deleteChore(id)
+  .done(choreDeleteSuccess(event))
+  .fail(failure);
+};
+
+const displayChores = (data) => {
+  const table = $('table#chores tbody');
+  $.each(data.chores, function (i, chore){
+    return table.append("<tr><td>" + chore.chore + "</td><td>" +chore.where + "</td><td>" + chore.when + "</td><td><a class='btn btn-warning chore-delete' href='#' data-chore-id='" + chore.id + "'>Delete</a><a class='btn btn-primary chore-update' href='#' data-chore-id='" + chore.id + "'>Edit</a></td></tr>");
+  });
+  $(".chore-update").on("click", displayEditChoreForm);
+  $(".chore-delete").on("click", deleteChore);
+};
+
+const displayEditChoreForm = (event) => {
+  let parent = $(event.currentTarget).parents('tr');
+  let choreValue = parent.find('td:first-child').text()
+  let whenValue = parent.find('td:nth-child(2)').text()
+  let whereValue = parent.find('td:nth-child(1)').text()
+
+  parent.empty()
+  parent.html("<form action='/chores/" + parent.data('chore-id') +
+    "' method='PUT'><td><input name='chore[chore]' value='" + choreValue + "'/></td><td><input name='chore[where]' value='" + whereValue + "'/></td><td><input name='chore[when]' value='" + whenValue + "'/></td><td><button type='submit' value='Update' class='btn btn-primary'>Update</button></td></form>"
+  );
+};
+
+const displayChore = (data) => {
+  const chore = data.chore;
+  const table = $('table#chores tbody');
+  table.append("<tr><td>" + chore.chore + "</td><td>" +chore.where + "</td><td>" + chore.when + "</td><td><a class='btn btn-warning chore-delete' href='#' data-chore-id='" + chore.id + "'>Delete</a><a class='btn btn-primary chore-update' href='#' data-chore-id='" + chore.id + "'>Edit</a></td></tr>");
+
+  $(".chore-update").on("click", displayEditChoreForm);
+  $(".chore-delete").on("click", deleteChore);
+};
+
+const signOutSuccess = () => {
+  console.log('User signed out successfully');
+  app.user = null;
+};
+
+
+module.exports = {
+  success,
+  failure,
+  signInSuccess,
+  signOutSuccess,
+  displayChores,
+  displayChore
+};
