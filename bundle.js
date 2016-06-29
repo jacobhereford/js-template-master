@@ -52,7 +52,7 @@ webpackJsonp([0],[
 	'use strict';
 
 	module.exports = {
-	  host: 'http://grunt-todo.herokuapp.com/'
+	  host: 'https://agile-sands-77805.herokuapp.com/'
 	};
 
 	///// same thing
