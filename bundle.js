@@ -52,10 +52,11 @@ webpackJsonp([0],[
 	'use strict';
 
 	module.exports = {
-	  host: 'http://localhost:3000'
+	  host: 'http://grunt-todo.herokuapp.com/'
 	};
 
 	///// same thing
+	///http://grunt-todo.herokuapp.com/
 
 /***/ },
 /* 4 */
