@@ -1,7 +1,7 @@
 'use strict';
 
 module.exports = {
-  host: '//agile-sands-77805.herokuapp.com/',
+  host: 'http://agile-hollows-29875.herokuapp.com/',
 };
 
 ///// same thing
