@@ -1,7 +1,8 @@
 'use strict';
 
 module.exports = {
-  host: 'https://grunt-todo.herokuapp.com/',
+  host: 'http://grunt-todo.herokuapp.com/',
 };
 
 ///// same thing
+///http://grunt-todo.herokuapp.com/
