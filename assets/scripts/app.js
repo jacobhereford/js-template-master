@@ -1,7 +1,7 @@
 'use strict';
 
 module.exports = {
-  host: 'http://localhost:3000',
+  host: 'https://grunt-todo.herokuapp.com/',
 };
 
 ///// same thing
