@@ -2,6 +2,8 @@
 
 const app = require('../app.js');
 const api = require('./api.js');
+const getFormFields = require('../../../lib/get-form-fields');
+
 
 const success = (data) => {
   if (data) {
@@ -43,16 +45,22 @@ const displayChores = (data) => {
   $(".chore-delete").on("click", deleteChore);
 };
 
+const updateChore = (event) => {
+  event.preventDefault();
+  let data = getFormFields(event.target);
+  api.updateChore(data)
+  .done(displayChore)
+  .fail(failure);
+};
+
 const displayEditChoreForm = (event) => {
   let parent = $(event.currentTarget).parents('tr');
-  let choreValue = parent.find('td:first-child').text()
-  let whenValue = parent.find('td:nth-child(2)').text()
-  let whereValue = parent.find('td:nth-child(1)').text()
 
   parent.empty()
-  parent.html("<form action='/chores/" + parent.data('chore-id') +
-    "' method='PUT'><td><input name='chore[chore]' value='" + choreValue + "'/></td><td><input name='chore[where]' value='" + whereValue + "'/></td><td><input name='chore[when]' value='" + whenValue + "'/></td><td><button type='submit' value='Update' class='btn btn-primary'>Update</button></td></form>"
+  parent.html("<form class='update-form' action='/chores/" + $(event.currentTarget).data('chore-id') + "' method='PUT'><td><input name='chore[chore]' /></td><td><input name='chore[where]' /></td><td><input name='chore[when]' /></td><td><button type='submit' value='Update' class='btn btn-primary'>Update</button></td></form>"
   );
+
+  $('.update-form').on('submit', updateChore);
 };
 
 const displayChore = (data) => {
@@ -68,7 +76,6 @@ const signOutSuccess = () => {
   console.log('User signed out successfully');
   app.user = null;
 };
-
 
 module.exports = {
   success,
