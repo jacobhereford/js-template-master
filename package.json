@@ -6,6 +6,9 @@
   "dependencies": {
     "jquery": "^2.2.2"
   },
+"scripts": {
+  "start": "grunt serve"
+},
   "devDependencies": {
     "babel-core": "^6.7.4",
     "babel-loader": "^6.2.4",
