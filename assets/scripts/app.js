@@ -1,7 +1,7 @@
 'use strict';
 
 module.exports = {
-  host: 'http://localhost:3000',
+  host: 'https://young-hollows-48962.herokuapp.com',
 };
 
 //http://agile-hollows-29875.herokuapp.com
