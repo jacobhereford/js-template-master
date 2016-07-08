@@ -4,6 +4,7 @@ const getFormFields = require('../../../lib/get-form-fields');
 
 const api = require('./api');
 const ui = require('./ui');
+const app = require('../app');
 
 
 const onSignUp = (event) => {
@@ -23,10 +24,12 @@ const displayChores = () => {
 const onSignIn = (event) => {
   event.preventDefault();
   let data = getFormFields(event.target);
-  api.signIn(data)
-  .done(ui.signInSuccess)
-  .done(displayChores)
-  .fail(ui.failure);
+  if (!app.user) {
+    api.signIn(data)
+    .done(ui.signInSuccess)
+    .done(displayChores)
+    .fail(ui.failure);
+  }
 };
 
 const onSignOut = (event) => {
@@ -65,8 +68,10 @@ const addHandlers = () => {
   $('#sign-in').on('submit', onSignIn);
   $('#sign-out').on('submit', onSignOut);
   $('#change-password').on('submit', onChangePassword);
-  $('#update-chore').on('submit', updateChore);
+  $('#chore-update').on('submit', updateChore)
   $('#create-chore').on('submit', createChore);
+  $("#update-chore form").on('submit', updateChore);
+
 };
 //
 module.exports = {

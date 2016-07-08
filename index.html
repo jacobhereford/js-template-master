@@ -42,10 +42,9 @@
       <form id="create-chore">
         <fieldset>
           <legend>Create Chore</legend>
-          <input type="create" name="chore[chore]" placeholder="Create Chore">
+          <input type="create" name="chore[title]" placeholder="Create Chore">
           <input type="create" name="chore[where]" placeholder="Where">
           <input type="create" name="chore[when]" placeholder="When">
-          <input type="create" name="chore[done_by]" placeholder="Done_by">
           <input type="submit" name="submit" value="Create Chore">
         </fieldset>
       </form>
@@ -76,5 +75,15 @@
         <tbody>
         </tbody>
       </table>
+      <div id="update-chore">
+        <form class="update-form" action="#" style="display: none;">
+          <input name="chore[title]" type="text" />
+          <input name="chore[where]" type="text" />
+          <input name="chore[when]" type="text"/>
+          <input name="chore[id]" type="hidden" />
+
+          <button type="submit" class="btn btn-primary">Update</button>
+        </form>
+      </div>
     </body>
 </html>

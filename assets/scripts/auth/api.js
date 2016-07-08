@@ -11,11 +11,11 @@ const signUp = (data) => {
 };
 
 const signIn = (data) => {
-  return $.ajax({
-    url: app.host + '/sign-in',
-    method: "POST",
-    data: data,
-  });
+    return $.ajax({
+      url: app.host + '/sign-in',
+      method: "POST",
+      data: data,
+    });
 };
 
 const signOut = () => {
@@ -41,7 +41,7 @@ const changePassword = (data) => {
 
 const updateChore = (data) => {
   return $.ajax({
-    url: app.host + '/chores/' + data.id,
+    url: app.host + '/chores/' + data.chore.id,
     method: "PATCH",
     headers: {
       Authorization: 'Token token=' +app.user.token,
