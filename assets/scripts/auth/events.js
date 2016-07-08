@@ -4,32 +4,32 @@ const getFormFields = require('../../../lib/get-form-fields');
 
 const api = require('./api');
 const ui = require('./ui');
-const app = require('../app');
 
 
 const onSignUp = (event) => {
   event.preventDefault();
   let data = getFormFields(event.target);
+  $('#sign-up').find('[type="text"]').val('');
+  $('#sign-up').find('[type="password"]').val('');
   api.signUp(data)
   .done(ui.success)
   .fail(ui.failure);
 };
 
-const displayChores = () => {
-  api.displayChores()
-  .done(ui.displayChores)
-  .fail(ui.failure);
-};
+// const displayChores = () => {
+//   api.displayChores()
+//   .done(ui.displayChores)
+//   .fail(ui.failure);
+// };
 
 const onSignIn = (event) => {
   event.preventDefault();
   let data = getFormFields(event.target);
-  if (!app.user) {
-    api.signIn(data)
-    .done(ui.signInSuccess)
-    .done(displayChores)
-    .fail(ui.failure);
-  }
+  $('#sign-in').find('[type="text"]').val('');
+  $('#sign-in').find('[type="password"]').val('');
+  api.signIn(data)
+  .done(ui.signInSuccess)
+  .fail(ui.failure);
 };
 
 const onSignOut = (event) => {
@@ -47,33 +47,13 @@ const onChangePassword = (event) => {
   .fail(ui.failure);
 };
 
-const updateChore = (event) => {
-  event.preventDefault();
-  let data = getFormFields(event.target);
-  api.updateChore(data)
-  .done(ui.success)
-  .fail(ui.failure);
-};
-
-const createChore = (event) => {
-  event.preventDefault();
-  let data = getFormFields(event.target);
-  api.createChore(data)
-  .done(ui.displayChore)
-  .fail(ui.failure);
-};
-
 const addHandlers = () => {
   $('#sign-up').on('submit', onSignUp);
   $('#sign-in').on('submit', onSignIn);
   $('#sign-out').on('submit', onSignOut);
   $('#change-password').on('submit', onChangePassword);
-  $('#chore-update').on('submit', updateChore)
-  $('#create-chore').on('submit', createChore);
-  $("#update-chore form").on('submit', updateChore);
-
 };
-//
+
 module.exports = {
   addHandlers,
 };

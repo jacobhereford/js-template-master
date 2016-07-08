@@ -1,0 +1,24 @@
+<table class="table table-striped">
+  <thead>
+    <tr>
+      <th></th>
+      <th>Title</th>
+      <th>Where</th>
+      <th>When</th>
+      <th>Update</th>
+      <th>Delete</th>
+    </tr>
+  </thead>
+  <tbody>
+    {{#chores}}
+      <tr>
+        <th scope="row"></th>
+        <td>{{title}}</td>
+        <td>{{where}}</td>
+        <td>{{when}}</td>
+        <td><button class="btn btn-default update-chore" type="submit" data-id={{id}}>Update Chore</button></td>
+        <td><button class="btn btn-default delete-chore" data-id={{id}}>Delete Chore</button></td>
+      </tr>
+    {{/chores}}
+  </tbody>
+</table>

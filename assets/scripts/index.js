@@ -4,11 +4,10 @@
 // var example = require('./example');
 
 // use require without a reference to ensure a file is bundled
-require('./app');
-require('./auth/api');
-const events = require('./auth/events');
-require('./auth/ui');
+const authEvents = require('./auth/events.js');
+const choreEvents = require('./chores/events.js');
 
 $( function() {
-  events.addHandlers();
-})
+  authEvents.addHandlers();
+  choreEvents.addHandlers();
+});
