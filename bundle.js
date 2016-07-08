@@ -107,7 +107,7 @@ webpackJsonp([0],[
 
 	var updateChore = function updateChore(data) {
 	  return $.ajax({
-	    url: app.host + '/chores/' + data.id,
+	    url: app.host + '/chores/' + data.chore.id,
 	    method: "PATCH",
 	    headers: {
 	      Authorization: 'Token token=' + app.user.token
@@ -186,6 +186,7 @@ webpackJsonp([0],[
 
 	var api = __webpack_require__(4);
 	var ui = __webpack_require__(7);
+	var app = __webpack_require__(3);
 
 	var onSignUp = function onSignUp(event) {
 	  event.preventDefault();
@@ -200,7 +201,9 @@ webpackJsonp([0],[
 	var onSignIn = function onSignIn(event) {
 	  event.preventDefault();
 	  var data = getFormFields(event.target);
-	  api.signIn(data).done(ui.signInSuccess).done(displayChores).fail(ui.failure);
+	  if (!app.user) {
+	    api.signIn(data).done(ui.signInSuccess).done(displayChores).fail(ui.failure);
+	  }
 	};
 
 	var onSignOut = function onSignOut(event) {
@@ -231,8 +234,9 @@ webpackJsonp([0],[
 	  $('#sign-in').on('submit', onSignIn);
 	  $('#sign-out').on('submit', onSignOut);
 	  $('#change-password').on('submit', onChangePassword);
-	  $('#update-chore').on('submit', updateChore);
+	  $('#chore-update').on('submit', updateChore);
 	  $('#create-chore').on('submit', createChore);
+	  $("#update-chore form").on('submit', updateChore);
 	};
 	//
 	module.exports = {
@@ -313,7 +317,8 @@ webpackJsonp([0],[
 
 	var app = __webpack_require__(3);
 	var api = __webpack_require__(4);
-	var getFormFields = __webpack_require__(6);
+	// const getFormFields = require('../../../lib/get-form-fields');
+	var events = __webpack_require__(5);
 
 	var success = function success(data) {
 	  if (data) {
@@ -343,28 +348,20 @@ webpackJsonp([0],[
 	  api.deleteChore(id).done(choreDeleteSuccess(event)).fail(failure);
 	};
 
+	var displayEditChoreForm = function displayEditChoreForm(event) {
+	  var form = $("#update-chore form");
+	  var choreID = $(event.currentTarget).data('choreId');
+	  form.toggle();
+	  $('input[name="chore[id]"]').val(choreID);
+	};
+
 	var displayChores = function displayChores(data) {
 	  var table = $('table#chores tbody');
 	  $.each(data.chores, function (i, chore) {
-	    return table.append("<tr><td>" + chore.chore + "</td><td>" + chore.where + "</td><td>" + chore.when + "</td><td><a class='btn btn-warning chore-delete' href='#' data-chore-id='" + chore.id + "'>Delete</a><a class='btn btn-primary chore-update' href='#' data-chore-id='" + chore.id + "'>Edit</a></td></tr>");
+	    return table.append("<tr><td>" + chore.title + "</td><td>" + chore.where + "</td><td>" + chore.when + "</td><td><a class='btn btn-warning chore-delete' href='#' data-chore-id='" + chore.id + "'>Delete</a><a class='btn btn-primary chore-update' href='#' data-chore-id='" + chore.id + "'>Edit</a></td></tr>");
 	  });
-	  $(".chore-update").on("click", displayEditChoreForm);
-	  $(".chore-delete").on("click", deleteChore);
-	};
-
-	var updateChore = function updateChore(event) {
-	  event.preventDefault();
-	  var data = getFormFields(event.target);
-	  api.updateChore(data).done(displayChore).fail(failure);
-	};
-
-	var displayEditChoreForm = function displayEditChoreForm(event) {
-	  var parent = $(event.currentTarget).parents('tr');
-
-	  parent.empty();
-	  parent.html("<form class='update-form' action='/chores/" + $(event.currentTarget).data('chore-id') + "' method='PUT'><td><input name='chore[chore]' /></td><td><input name='chore[where]' /></td><td><input name='chore[when]' /></td><td><button type='submit' value='Update' class='btn btn-primary'>Update</button></td></form>");
-
-	  $('.update-form').on('submit', updateChore);
+	  $('body').on('click', '.chore-update', displayEditChoreForm);
+	  $('body').on('click', '.chore-delete', deleteChore);
 	};
 
 	var displayChore = function displayChore(data) {
@@ -372,8 +369,8 @@ webpackJsonp([0],[
 	  var table = $('table#chores tbody');
 	  table.append("<tr><td>" + chore.chore + "</td><td>" + chore.where + "</td><td>" + chore.when + "</td><td><a class='btn btn-warning chore-delete' href='#' data-chore-id='" + chore.id + "'>Delete</a><a class='btn btn-primary chore-update' href='#' data-chore-id='" + chore.id + "'>Edit</a></td></tr>");
 
-	  $(".chore-update").on("click", displayEditChoreForm);
-	  $(".chore-delete").on("click", deleteChore);
+	  $('body').on('click', '.chore-update', displayEditChoreForm);
+	  $('body').on('click', '.chore-delete', deleteChore);
 	};
 
 	var signOutSuccess = function signOutSuccess() {
