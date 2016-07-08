@@ -56,7 +56,7 @@ const displayChores = (data) => {
 const displayChore = (data) => {
   const chore = data.chore;
   const table = $('table#chores tbody');
-  table.append("<tr><td>" + chore.chore + "</td><td>" +chore.where + "</td><td>" + chore.when + "</td><td><a class='btn btn-warning chore-delete' href='#' data-chore-id='" + chore.id + "'>Delete</a><a class='btn btn-primary chore-update' href='#' data-chore-id='" + chore.id + "'>Edit</a></td></tr>");
+  table.append("<tr><td>" + chore.title + "</td><td>" +chore.where + "</td><td>" + chore.when + "</td><td><a class='btn btn-warning chore-delete' href='#' data-chore-id='" + chore.id + "'>Delete</a><a class='btn btn-primary chore-update' href='#' data-chore-id='" + chore.id + "'>Edit</a></td></tr>");
 
   $('body').on('click', '.chore-update', displayEditChoreForm);
   $('body').on('click', '.chore-delete', deleteChore);
