@@ -42,18 +42,20 @@
       <form id="create-chore" class="hide">
         <fieldset>
           <legend>Create Chore</legend>
-          <input type="text" name="chore[title]" placeholder="What is the Chore?">
-          <input type="text" name="chore[where]" placeholder="Where will the Chore take place?">
-          <input type="text" name="chore[when]" placeholder="When are you planning on doing this Chore?">
+          <div id="create-alert" class="alert alert-danger hide" role="alert">Please Complete All Fields!</div>
+          <input id="create-1" type="text" name="chore[title]" placeholder="What is the Chore?">
+          <input id="create-2" type="text" name="chore[where]" placeholder="Where will the Chore take place?">
+          <input id="create-3" type="text" name="chore[when]" placeholder="When are you planning on doing this Chore?">
           <input type="submit" name="submit" value="Create Chore">
         </fieldset>
       </form>
       <form id="update-form" class="hide">
         <fieldset>
           <legend>Update Chore</legend>
-          <input type="text" name="chore[title]" placeholder="Title">
-          <input type="text" name="chore[where]" placeholder="Where">
-          <input type="text" name="chore[when]" placeholder="When">
+          <div id="update-alert" class="alert alert-danger hide" role="alert">Please Complete All Fields!</div>
+          <input id="update-1" type="text" name="chore[title]" placeholder="Title">
+          <input id="update-2" type="text" name="chore[where]" placeholder="Where">
+          <input id="update-3" type="text" name="chore[when]" placeholder="When">
           <input id="chore-id" type="hidden" name="chore[id]" value="">
           <input type="submit" name="submit" data-id="" value="Update Chore">
         </fieldset>

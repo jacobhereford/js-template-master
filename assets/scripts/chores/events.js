@@ -15,19 +15,31 @@ const updateChore = (event) => {
   event.preventDefault();
   let chore_id = $('#chore-id').val();
   let data = getFormFields(event.target);
-  $('#update-form').find('[type="text"]').val('');
-  api.updateChore(data, chore_id)
-  .done(ui.createChoreSuccess)
-  .fail(ui.failure);
+  if ($('#update-1').val() === '' || $('#update-2').val() === '' || $('#update-3').val() === '') {
+    $('#update-alert').removeClass('hide');
+    return;
+  } else {
+    $('#update-alert').addClass('hide');
+    $('#update-form').find('[type="text"]').val('');
+    api.updateChore(data, chore_id)
+    .done(ui.createChoreSuccess)
+    .fail(ui.failure);
+  }
 };
 
 const createChore = (event) => {
   event.preventDefault();
   let data = getFormFields(event.target);
-  $('#create-chore').find('[type="text"]').val('');
-  api.createChore(data)
-  .done(ui.createChoreSuccess)
-  .fail(ui.failure);
+  if ($('#create-1').val() === '' || $('#create-2').val() === '' || $('#create-3').val() === '') {
+    $('#create-alert').removeClass('hide');
+    return;
+  } else {
+    $('#create-alert').addClass('hide');
+    $('#create-chore').find('[type="text"]').val('');
+    api.createChore(data)
+    .done(ui.createChoreSuccess)
+    .fail(ui.failure);
+  }
 };
 
 // const deleteChore = (event) => {
